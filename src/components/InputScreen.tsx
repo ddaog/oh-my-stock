@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, ChevronRight, User, Check } from 'lucide-react';
+import { Calendar, Clock, ChevronRight, User } from 'lucide-react';
 
 interface InputScreenProps {
     onNext: (data: SajuFormData) => void;
@@ -20,8 +20,6 @@ const InputScreen: React.FC<InputScreenProps> = ({ onNext }) => {
         gender: 'male',
         isBirthTimeUnknown: false,
     });
-
-    const [pickerOpen, setPickerOpen] = useState<'date' | 'time' | null>(null);
 
     const isValid = formData.birthDate.length === 10 && (formData.isBirthTimeUnknown || formData.birthTime.length === 5);
 

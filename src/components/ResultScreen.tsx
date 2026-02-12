@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Share2, RefreshCw, ChevronDown, TrendingUp, Sparkles } from 'lucide-react';
+import { Share2, RefreshCw, TrendingUp, Sparkles } from 'lucide-react';
 import type { StockInfo, SajuElement } from '../utils/sajuLogic';
 import confetti from 'canvas-confetti';
 
