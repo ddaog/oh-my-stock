@@ -11,22 +11,43 @@ interface ResultScreenProps {
 
 const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset }) => {
 
-    const handleShare = () => {
+    const handleShare = async () => {
+        const shareText = `나의 오행 기운은 '${element}'! 추천 주식은 ${stocks[0].name}입니다.`;
+        const shareUrl = window.location.href;
+
         if (navigator.share) {
-            navigator.share({
-                title: '내 사주에 맞는 반려주식 찾기',
-                text: `나의 오행 기운은 '${element}'! 추천 주식은 ${stocks[0].name}입니다.`,
-                url: window.location.href,
-            });
+            try {
+                await navigator.share({
+                    title: '내 사주에 맞는 반려주식 찾기',
+                    text: shareText,
+                    url: shareUrl,
+                });
+                confetti({
+                    particleCount: 80,
+                    spread: 60,
+                    origin: { y: 0.6 },
+                    colors: ['#3182f6', '#ffffff']
+                });
+            } catch {
+                copyToClipboard(shareUrl);
+            }
         } else {
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#3182f6', '#ffffff', '#ff4d4d']
-            });
-            alert('공유 링크가 복사되었습니다!');
+            copyToClipboard(shareUrl);
         }
+    };
+
+    const copyToClipboard = (text: string) => {
+        navigator.clipboard.writeText(text).then(() => {
+            confetti({
+                particleCount: 80,
+                spread: 60,
+                origin: { y: 0.6 },
+                colors: ['#3182f6', '#ffffff']
+            });
+            alert('링크가 복사되었어요!');
+        }).catch(() => {
+            alert('복사에 실패했어요. 링크를 직접 공유해 주세요.');
+        });
     };
 
     const elementTheme: Record<SajuElement, { icon: string; name: string; color: string; bg: string }> = {
@@ -72,10 +93,10 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
                     {stocks.map((stock, index) => (
                         <motion.div
                             key={stock.ticker}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 16 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.15 }}
-                            className="modern-card transition-all active:scale-[0.98] cursor-pointer relative overflow-hidden group"
+                            transition={{ delay: index * 0.12, type: 'spring', stiffness: 300, damping: 24 }}
+                            className="modern-card transition-all active:scale-[0.99] relative overflow-hidden group"
                         >
                             {index === 0 && (
                                 <div className="absolute top-0 right-0 p-3">
@@ -83,7 +104,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
                                 </div>
                             )}
                             <div className="flex items-center gap-5">
-                                <div className="w-12 h-12 bg-toss-grey-50 rounded-2xl flex items-center justify-center font-[900] text-toss-grey-900 border border-toss-grey-100">
+                                <div className="w-11 h-11 bg-toss-grey-50 rounded-[var(--rounded-sm)] flex items-center justify-center font-[900] text-toss-grey-800 border border-toss-grey-100">
                                     {index + 1}
                                 </div>
                                 <div className="flex-1 min-w-0">
@@ -103,7 +124,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
             </div>
 
             <div className="space-y-10 pb-16">
-                <div className={`modern-card p-7 space-y-4 border-none shadow-none ${theme.bg}`}>
+                <div className={`modern-card p-6 space-y-3 border-none shadow-none rounded-[var(--rounded-md)] ${theme.bg}`}>
                     <h4 className="font-black text-toss-grey-800 flex items-center gap-2">
                         <TrendingUp size={18} strokeWidth={3} /> 상세 분석
                     </h4>
@@ -130,18 +151,18 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
                 </div>
             </div>
 
-            <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent max-w-[480px] mx-auto flex gap-3 z-50 pt-12">
+            <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white/95 to-transparent max-w-[480px] mx-auto flex gap-3 z-50 pt-12 bottom-cta-bar">
                 <button
                     onClick={handleShare}
-                    className="flex-1 btn-secondary py-5 rounded-[22px] flex items-center justify-center gap-2 text-base font-black transition-all hover:bg-toss-grey-200"
+                    className="flex-1 btn-secondary py-5 rounded-[var(--rounded-md)] flex items-center justify-center gap-2 text-base font-bold transition-all hover:bg-toss-grey-200 active:scale-[0.98]"
                 >
-                    <Share2 size={20} strokeWidth={3} /> 공유하기
+                    <Share2 size={20} strokeWidth={2.5} /> 공유하기
                 </button>
                 <button
                     onClick={onReset}
-                    className="flex-1 btn-primary py-5 rounded-[22px] flex items-center justify-center gap-2 text-base font-black shadow-lg shadow-toss-blue/20"
+                    className="flex-1 btn-primary py-5 rounded-[var(--rounded-md)] flex items-center justify-center gap-2 text-base font-bold shadow-lg shadow-toss-blue/20 active:scale-[0.98]"
                 >
-                    <RefreshCw size={20} strokeWidth={3} /> 다시 하기
+                    <RefreshCw size={20} strokeWidth={2.5} /> 다시 하기
                 </button>
             </div>
         </div>

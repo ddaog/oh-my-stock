@@ -74,8 +74,8 @@ const InputScreen: React.FC<InputScreenProps> = ({ onNext }) => {
             <div className="space-y-8">
                 {/* Date Input */}
                 <div className="space-y-3">
-                    <label className="text-sm font-[800] text-toss-grey-500 uppercase flex items-center gap-2 tracking-wider">
-                        <Calendar size={14} strokeWidth={3} /> 생년월일
+                    <label className="text-sm font-bold text-toss-grey-600 flex items-center gap-2">
+                        <Calendar size={16} strokeWidth={2} /> 생년월일
                     </label>
                     <input
                         type="text"
@@ -89,13 +89,13 @@ const InputScreen: React.FC<InputScreenProps> = ({ onNext }) => {
                 {/* Time Input */}
                 <div className="space-y-3">
                     <div className="flex justify-between items-center">
-                        <label className="text-sm font-[800] text-toss-grey-500 uppercase flex items-center gap-2 tracking-wider">
-                            <Clock size={14} strokeWidth={3} /> 태어난 시각
+                        <label className="text-sm font-bold text-toss-grey-600 flex items-center gap-2">
+                            <Clock size={16} strokeWidth={2} /> 태어난 시각
                         </label>
                         <button
                             type="button"
                             onClick={() => setFormData({ ...formData, isBirthTimeUnknown: !formData.isBirthTimeUnknown })}
-                            className={`text-xs font-bold px-3 py-1.5 rounded-full transition-all ${formData.isBirthTimeUnknown ? 'bg-toss-grey-800 text-white' : 'bg-toss-grey-100 text-toss-grey-500'
+                            className={`text-xs font-bold px-3 py-1.5 rounded-[var(--rounded-xs)] transition-all ${formData.isBirthTimeUnknown ? 'bg-toss-grey-800 text-white' : 'bg-toss-grey-100 text-toss-grey-500'
                                 }`}
                         >
                             모름
@@ -119,10 +119,10 @@ const InputScreen: React.FC<InputScreenProps> = ({ onNext }) => {
 
                 {/* Gender Select */}
                 <div className="space-y-3">
-                    <label className="text-sm font-[800] text-toss-grey-500 uppercase flex items-center gap-2 tracking-wider">
-                        <User size={14} strokeWidth={3} /> 성별
+                    <label className="text-sm font-bold text-toss-grey-600 flex items-center gap-2">
+                        <User size={16} strokeWidth={2} /> 성별
                     </label>
-                    <div className="flex p-1.5 bg-toss-grey-100 rounded-[20px] relative">
+                    <div className="flex p-1.5 bg-toss-grey-100 rounded-[var(--rounded-md)] relative">
                         <motion.div
                             className="absolute bg-white rounded-[16px] shadow-sm h-[calc(100%-12px)] top-1.5"
                             animate={{
@@ -151,17 +151,17 @@ const InputScreen: React.FC<InputScreenProps> = ({ onNext }) => {
                 </div>
             </div>
 
-            {/* Sticky Lower Button */}
-            <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent max-w-[480px] mx-auto z-50 pt-12">
+            {/* Bottom CTA (Toss-style) */}
+            <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white/95 to-transparent max-w-[480px] mx-auto z-50 pt-12 bottom-cta-bar">
                 <motion.button
                     whileTap={{ scale: 0.98 }}
                     disabled={!isValid}
                     onClick={() => handleSubmit()}
-                    className={`w-full py-5 rounded-[22px] flex items-center justify-center gap-3 text-xl font-[900] shadow-xl transition-all ${isValid ? 'bg-toss-blue text-white shadow-toss-blue/20' : 'bg-toss-grey-200 text-toss-grey-400 shadow-none'
+                    className={`w-full py-5 rounded-[var(--rounded-md)] flex items-center justify-center gap-3 text-lg font-[900] transition-all ${isValid ? 'bg-toss-blue text-white shadow-lg shadow-toss-blue/25' : 'bg-toss-grey-200 text-toss-grey-400 cursor-not-allowed'
                         }`}
                 >
                     기운 분석하기
-                    <ChevronRight size={24} strokeWidth={3} />
+                    <ChevronRight size={22} strokeWidth={2.5} />
                 </motion.button>
             </div>
         </div>

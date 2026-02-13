@@ -6,8 +6,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-black text-slate-900 dark:text-slate-100">
-      <main className="flex-1 px-5 pt-8 pb-32">
+    <div className="min-h-[100dvh] flex flex-col bg-white">
+      <main className="flex-1 flex flex-col overflow-x-hidden">
         {children}
       </main>
     </div>
