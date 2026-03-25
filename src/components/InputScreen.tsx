@@ -62,12 +62,12 @@ const InputScreen: React.FC<InputScreenProps> = ({ onNext }) => {
                     />
                 </div>
                 <h1 className="text-[2.2rem] font-[900] leading-[1.2] mb-4">
-                    반려주식을 위한<br />
-                    <span className="text-toss-blue">기운을 확인하세요</span>
+                    사주로 알아보는<br />
+                    <span className="text-toss-blue">나만의 운명 종목</span>
                 </h1>
                 <p className="text-toss-grey-600 font-bold text-lg">
-                    3D 인공지능이 당신의 사주를 분석해<br />
-                    찰떡궁합 종목을 추천해 드릴게요.
+                    생년월일 속 오행의 기운을 읽어<br />
+                    당신과 찰떡인 주식을 찾아드려요.
                 </p>
             </motion.div>
 
@@ -160,7 +160,7 @@ const InputScreen: React.FC<InputScreenProps> = ({ onNext }) => {
                     className={`w-full py-5 rounded-[var(--rounded-md)] flex items-center justify-center gap-3 text-lg font-[900] transition-all ${isValid ? 'bg-toss-blue text-white shadow-lg shadow-toss-blue/25' : 'bg-toss-grey-200 text-toss-grey-400 cursor-not-allowed'
                         }`}
                 >
-                    기운 분석하기
+                    내 운명 종목 보기
                     <ChevronRight size={22} strokeWidth={2.5} />
                 </motion.button>
             </div>

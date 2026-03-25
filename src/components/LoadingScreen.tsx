@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const TIPS = [
-    "하늘의 기운과 시장의 에너지를 분석하고 있어요.",
-    "사주에 맞는 종목은 당신의 기운과 조화를 이룹니다.",
-    "잠시 스트레칭을 하며 여유를 가져보세요.",
-    "나의 투자 성향과 오행의 균형을 맞추는 중입니다.",
-    "내일의 운세를 미리 보는 마음으로 기다려주세요."
+    "천간과 지지의 흐름을 읽고 있어요.",
+    "오행의 균형 속에서 종목의 기운을 찾는 중이에요.",
+    "당신의 사주에 숨겨진 재물운을 해석하고 있어요.",
+    "수천 개의 종목 중 운명의 주식을 골라내는 중이에요.",
+    "하늘이 정해준 포트폴리오, 곧 공개됩니다."
 ];
 
 interface LoadingScreenProps {
@@ -65,10 +65,10 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
             <div className="text-center space-y-2 mb-10">
                 <h2 className="text-xl font-[900] tracking-tight text-toss-grey-800">
-                    기운을 모으고 있어요
+                    사주를 풀어보는 중이에요
                 </h2>
                 <p className="text-toss-grey-500 text-sm font-semibold">
-                    당신만을 위한 반려주식 분석 중...
+                    오행의 기운으로 운명의 종목을 찾고 있어요...
                 </p>
             </div>
 
@@ -82,7 +82,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                     />
                 </div>
                 <div className="mt-2 flex justify-between items-center">
-                    <span className="text-xs font-bold text-toss-grey-500">분석 중</span>
+                    <span className="text-xs font-bold text-toss-grey-500">사주 해석 중</span>
                     <span className="text-sm font-bold text-toss-blue">{Math.round(progress)}%</span>
                 </div>
             </div>

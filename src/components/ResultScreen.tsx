@@ -12,13 +12,13 @@ interface ResultScreenProps {
 const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset }) => {
 
     const handleShare = async () => {
-        const shareText = `나의 오행 기운은 '${element}'! 추천 주식은 ${stocks[0].name}입니다.`;
+        const shareText = `내 사주 오행은 '${element}'! 운명이 점지한 주식은 ${stocks[0].name} 🔥`;
         const shareUrl = window.location.href;
 
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: '내 사주에 맞는 반려주식 찾기',
+                    title: '사주로 찾은 나의 운명 종목',
                     text: shareText,
                     url: shareUrl,
                 });
@@ -51,11 +51,11 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
     };
 
     const elementTheme: Record<SajuElement, { icon: string; name: string; color: string; bg: string }> = {
-        '木': { icon: '/assets/wood_element.png', name: '뿌리 깊은 나무 (木)', color: '#27ae60', bg: 'bg-green-50' },
-        '火': { icon: '/assets/fire_element.png', name: '타오르는 불꽃 (火)', color: '#e67e22', bg: 'bg-orange-50' },
-        '土': { icon: '/assets/earth_element.png', name: '풍요로운 대지 (土)', color: '#d35400', bg: 'bg-yellow-50' },
-        '金': { icon: '/assets/metal_element.png', name: '단단한 황금 (金)', color: '#f1c40f', bg: 'bg-gray-50' },
-        '水': { icon: '/assets/water_element.png', name: '고요한 바다 (水)', color: '#2980b9', bg: 'bg-blue-50' },
+        '木': { icon: '/assets/wood_element.png', name: '성장하는 나무의 기운 (木)', color: '#27ae60', bg: 'bg-green-50' },
+        '火': { icon: '/assets/fire_element.png', name: '불타는 열정의 기운 (火)', color: '#e67e22', bg: 'bg-orange-50' },
+        '土': { icon: '/assets/earth_element.png', name: '묵직한 대지의 기운 (土)', color: '#d35400', bg: 'bg-yellow-50' },
+        '金': { icon: '/assets/metal_element.png', name: '빛나는 금속의 기운 (金)', color: '#f1c40f', bg: 'bg-gray-50' },
+        '水': { icon: '/assets/water_element.png', name: '유연한 물의 기운 (水)', color: '#2980b9', bg: 'bg-blue-50' },
     };
 
     const theme = elementTheme[element];
@@ -74,7 +74,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
                 </motion.div>
                 <div className="space-y-2">
                     <p className="text-lg font-black text-toss-grey-400 flex items-center justify-center gap-2">
-                         당신의 강력한 기운
+                         당신의 사주 속 핵심 오행
                     </p>
                     <h1 className="text-[2.4rem] font-[900] tracking-tight leading-tight">
                         {theme.name}
@@ -85,7 +85,7 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
             <div className="space-y-6 mb-12">
                 <h3 className="font-[900] text-xl px-1 flex items-center justify-between">
                     <span className="flex items-center gap-2">
-                        <Sparkles size={20} className="text-toss-blue" fill="currentColor" /> 반려주식 TOP 3
+                        <Sparkles size={20} className="text-toss-blue" fill="currentColor" /> 운명의 종목 TOP 3
                     </span>
                     <span className="text-xs text-toss-grey-400 font-bold uppercase">Ranked</span>
                 </h3>
@@ -126,16 +126,16 @@ const ResultScreen: React.FC<ResultScreenProps> = ({ element, stocks, onReset })
             <div className="space-y-10 pb-16">
                 <div className={`modern-card p-6 space-y-3 border-none shadow-none rounded-[var(--rounded-md)] ${theme.bg}`}>
                     <h4 className="font-black text-toss-grey-800 flex items-center gap-2">
-                        <TrendingUp size={18} strokeWidth={3} /> 상세 분석
+                        <TrendingUp size={18} strokeWidth={3} /> 사주 해석 리포트
                     </h4>
                     <p className="text-toss-grey-600 leading-relaxed font-bold text-[15px]">
-                        분석 결과, 당신은 <strong>{theme.name}</strong>의 기운을 가지고 태어났습니다. 
-                        이는 어떤 상황에서도 중심을 잃지 않는 강한 정신력을 의미합니다. {stocks[0].name}와 같이 흐름을 주도하는 대형주들이 당신의 기운을 보완하며 최상의 시너지를 낼 것입니다.
+                        당신의 사주에는 <strong>{theme.name}</strong>이 깊이 자리하고 있어요.
+                        이 기운은 투자에서도 독특한 흐름을 만들어냅니다. {stocks[0].name}처럼 같은 결의 에너지를 가진 종목과 만나면 시너지가 극대화될 수 있어요.
                     </p>
                 </div>
 
                 <div className="space-y-8">
-                    <h4 className="font-[900] text-xl px-1">추천 이유</h4>
+                    <h4 className="font-[900] text-xl px-1">왜 이 종목일까?</h4>
                     <div className="space-y-8">
                         {stocks.map((stock) => (
                             <div key={stock.ticker + '-detail'} className="px-1 group">
